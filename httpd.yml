@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd-deployment
+  namespace: krishna
+  labels:
+    app: httpd
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: httpd
+  template:
+    metadata:
+      labels:
+        app: httpd
+    spec:
+      nodeSelector:
+        name: krishna
+      containers:
+      - name: httpd-container
+        image: krishnasai949203/httpd:v2
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: httpd-demo	
+
